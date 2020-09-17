@@ -1,0 +1,89 @@
+<div class="container" *ngIf="!loading">
+  <div class="row">
+    <div class="col">
+      Select monthly revenue
+    </div>
+    <div class="col">
+      Select Color
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="jan-revenue">January</label>
+        <input type="text" class="form-control" id="jan-revenue" [(ngModel)]="selectedOptions[0].revenue" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="jan-color">Color</label>
+        <select name="jan-color" id="jan-color" class="form-control" [(ngModel)]="selectedOptions[0].color">
+          <option *ngFor="let color of colors" [value]="color.color">{{ color.color }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="feb-revenue">Feburary</label>
+        <input type="text" class="form-control" id="feb-revenue" [(ngModel)]="selectedOptions[1].revenue" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="feb-color">Color</label>
+        <select name="feb-color" id="feb-color" class="form-control" [(ngModel)]="selectedOptions[1].color">
+          <option *ngFor="let color of colors" [value]="color.color">{{ color.color }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="mar-revenue">March</label>
+        <input type="text" class="form-control" id="mar-revenue" [(ngModel)]="selectedOptions[2].revenue">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="mar-color">Color</label>
+        <select name="mar-color" id="mar-color" class="form-control" [(ngModel)]="selectedOptions[2].color">
+          <option *ngFor="let color of colors" [value]="color.color">{{ color.color }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="form-check" *ngFor="let chart of chartTypes">
+        <input class="form-check-input" type="radio" name="chartType" id="{{chart.value}}-chart" value="{{chart.value}}"
+          (change)=OnSelectedChart(chart.value) [(ngModel)]="chartType" />
+        <label class="form-check-label" for="exampleRadios1">
+          {{chart.name}}
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <h3>Chart Data</h3>
+      <div id="container"></div>
+      <div id="container2"></div>
+      <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"
+        style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+    </div>
+  </div>
+
+
+</div>
+
+<div id="loader" *ngIf="loading">
+  <div class="lds-roller">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div>
+    </div>
